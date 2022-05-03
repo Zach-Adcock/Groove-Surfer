@@ -12,9 +12,12 @@ export default makeStyles((theme) => ({
     marginTop: '1rem',
     padding: '16px',
   },
-  gridContainer: {
+  mainContainer: {
     [theme.breakpoints.down('xs')]: {
       flexDirection: 'column-reverse',
     },
   },
+  chipInput: {
+    margin: '10px 0'
+  }
 }));
