@@ -4,12 +4,13 @@ import mongoose from 'mongoose';
 const postSchema = mongoose.Schema({
   artist: String,
   album: String,
+  name: String,
   tags: [String],
   selectedFile: String,
   creator: String,
-  likeCount: {
-    type: Number,
-    default: 0
+  likes: {
+    type: [String],
+    default: []
   },
   createdAt: {
     type: Date,

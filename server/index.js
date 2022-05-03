@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 
 import postRoutes from './routes/posts.js';
+import userRoutes from './routes/users.js';
 
 const app = express();
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(bodyParser.json({ limit: "50mb", extended: true}));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true}));
 app.use(cors());
 app.use('/posts', postRoutes);
+app.use('/user', userRoutes);
 //Connect to DataBase (mongoDB)
 
 const PORT = process.env.REACT_APP_PORT || 4000;

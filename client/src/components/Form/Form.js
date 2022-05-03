@@ -10,41 +10,47 @@ import { createPost, updatePost } from "../../actions/posts";
 
 const Form = ({ currentId, setCurrentId}) => {
   const classes = useStyles();
-  //postData will track form inputs: creator/artist/album/imageFile/tags
-  const [postData, setPostData] = useState({ creator: '', artist: '', album: '', tags: '', selectedFile: ''})
+  //postData will track form inputs: artist/album/imageFile/tags
+  const [postData, setPostData] = useState({ artist: '', album: '', tags: '', selectedFile: ''})
   const post = useSelector((state) => currentId ? state.posts.find((post) => post._id === currentId) : null);
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem('profile'));
 
   useEffect(() => {
     if (post) setPostData(post);
   }, [post])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (currentId) {
-      dispatch(updatePost(currentId, postData))
+    if (!currentId) {
+      console.log('currentId= ', currentId)
+      dispatch(createPost({ ...postData, name: user?.result?.name}));
     } else {
-      dispatch(createPost(postData));
+      console.log('current ID: ', currentId)
+      dispatch(updatePost(currentId, { ...postData, name: user?.result?.name}));
     }
     clear();
   }
 
+  if (!user?.result?.name) {
+    return (
+      <Paper className={classes.paper}>
+        <Typography variant="h6" align="center">
+          Sign in to add or like music!
+        </Typography>
+      </Paper>
+    )
+  }
+
   const clear = () => {
     setCurrentId(null);
-    setPostData({ creator: '', artist: '', album: '', tags: '', selectedFile: ''});
+    setPostData({ artist: '', album: '', tags: '', selectedFile: ''});
   }
 
   return ( 
     <Paper className={classes.paper}>
       <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
         <Typography variant="h6">{currentId ? 'Edit' : 'Add'} an Album</Typography>
-        <TextField 
-          name="creator" 
-          variant="outlined" 
-          label="Creator" 
-          fullWidth 
-          value={postData.creator}
-          onChange={(e) => setPostData({ ...postData, creator: e.target.value})}/>
         <TextField 
           name="artist" 
           variant="outlined" 
@@ -62,7 +68,7 @@ const Form = ({ currentId, setCurrentId}) => {
         <TextField 
           name="tags" 
           variant="outlined" 
-          label="Tags" 
+          label="Tags (comma separated)" 
           fullWidth 
           value={postData.tags}
           onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',')})}/>

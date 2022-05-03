@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AppBar, Avatar, Typography, Toolbar, Button } from '@material-ui/core';
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
+import decode from 'jwt-decode'
 
 import useStyles from './styles';
 import vinylRecord from '../../images/vinylRecord.png';
@@ -23,6 +24,12 @@ const Navbar = () => {
 
   useEffect(() => {
     const token = user?.token;
+
+    //check if token is expired
+    if (token) {
+      const decodedToken = decode(token)
+      if(decodedToken.exp * 1000 < new Date().getTime()) logout()
+    }
     setUser(JSON.parse(localStorage.getItem('profile')))
   }, [location])
 
@@ -35,7 +42,7 @@ const Navbar = () => {
         <Toolbar className={classes.toolbar}>
           {user ? (
             <div className={classes.profile}>
-              <Avatar className={classes.purple} alt={user.result.name} src={user.result.imageUrl}>
+              <Avatar className={classes.purple} alt={user.result.name} src={user.result.imageUrl} referrerPolicy="no-referrer">
                 {user.result.name.charAt(0)}
               </Avatar>
               <Typography className={classes.userName} variant="h6">{user.result.name}</Typography>

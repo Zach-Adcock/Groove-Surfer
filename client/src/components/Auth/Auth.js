@@ -7,9 +7,12 @@ import { useHistory } from 'react-router-dom';
 
 import googleLogo from '../../images/googleLogoSVG.svg'
 
-
+import { signin, signup } from '../../actions/auth';
 import useStyles from './styles'
 import FormInput from './FormInput';
+
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: ''}
+
 
 const Auth = () => {
   const classes = useStyles();
@@ -17,13 +20,21 @@ const Auth = () => {
   const history = useHistory();
   const [isSignUp, setIsSignUp] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState(initialState)
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
+    if (isSignUp) {
+      dispatch(signup(formData, history))
+    } else {
+      dispatch(signin(formData, history))
+
+    }
   };
 
-  const handleChange = () => {
-    
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value})
   };
   const switchMode = () => {
     setIsSignUp((prevIsSignUp) => !prevIsSignUp)
