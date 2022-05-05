@@ -18,7 +18,10 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true}));
 app.use(cors());
 app.use('/posts', postRoutes);
 app.use('/user', userRoutes);
-//Connect to DataBase (mongoDB)
+
+app.get('/', (req, res) => {
+  res.send('App is running.')
+});
 
 const PORT = process.env.REACT_APP_PORT || 4000;
 mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true})
