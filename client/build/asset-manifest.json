@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7541cb40.chunk.css",
+    "main.js": "/static/js/main.a599fee6.chunk.js",
+    "main.js.map": "/static/js/main.a599fee6.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.09b85ec0.js",
+    "runtime-main.js.map": "/static/js/runtime-main.09b85ec0.js.map",
+    "static/js/2.cf9be9ee.chunk.js": "/static/js/2.cf9be9ee.chunk.js",
+    "static/js/2.cf9be9ee.chunk.js.map": "/static/js/2.cf9be9ee.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.336b6bdc1c5b3ac9092e33afc4e1bf4a.js": "/precache-manifest.336b6bdc1c5b3ac9092e33afc4e1bf4a.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.7541cb40.chunk.css.map": "/static/css/main.7541cb40.chunk.css.map",
+    "static/js/2.cf9be9ee.chunk.js.LICENSE.txt": "/static/js/2.cf9be9ee.chunk.js.LICENSE.txt",
+    "static/media/googleLogoSVG.svg": "/static/media/googleLogoSVG.e99543bb.svg",
+    "static/media/vinylRecord.png": "/static/media/vinylRecord.c8912c38.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.09b85ec0.js",
+    "static/js/2.cf9be9ee.chunk.js",
+    "static/css/main.7541cb40.chunk.css",
+    "static/js/main.a599fee6.chunk.js"
+  ]
+}
